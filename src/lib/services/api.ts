@@ -4,7 +4,6 @@ export async function saveWork({ type, title, director, year }: {
     director: string;
     year: string
 }) {
-    console.log({ type, title, director, year });
 
     const response = await fetch(`${import.meta.env.VITE_BACKEND_FRASES}/works/`, {
         method: 'POST',
@@ -16,6 +15,26 @@ export async function saveWork({ type, title, director, year }: {
 
     if (!response.ok) {
         throw new Error('Failed to save work');
+    }
+
+    return await response.json();
+}
+
+
+export async function saveQuote({ quote, idWork }: {
+    quote: string;
+    idWork: string;
+}) {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_FRASES}/quotes/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'text': quote, 'work': idWork })
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to save quote');
     }
 
     return await response.json();
