@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { saveQuote } from '$lib/services/api';
 	import { goto } from '$app/navigation';
+	import Header from '$lib/components/Header.svelte';
 
 	const idWork = $derived(page.params.idWork);
 	const title = $derived(page.url.searchParams.get('title') || '');
@@ -37,10 +38,11 @@
 	}
 </script>
 
-<div class="mx-auto max-w-md p-6">
-	<h1 class="mb-6 text-3xl font-bold">
-		Agregar frase a: <span class="text-indigo-600">{title}</span>
-	</h1>
+<main class="min-h-screen w-full p-6">
+	<Header></Header>
+	<h3 class="mb-6 text-3xl font-bold">
+		Agregar frase a la obra: <span class="text-indigo-600">{title}</span>
+	</h3>
 
 	{#if message}
 		<div
@@ -98,4 +100,4 @@
 			</button>
 		</div>
 	</form>
-</div>
+</main>
